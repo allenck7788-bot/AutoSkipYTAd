@@ -19,11 +19,13 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
 
-    - name: Setup Gradle
-      uses: gradle/actions/setup-gradle@v3
+    # 強制指定使用相容的 Gradle 8.5 版本生成 Wrapper
+    - name: Generate Gradle Wrapper
+      run: gradle wrapper --gradle-version 8.5
 
+    # 執行打包
     - name: Build Debug APK
-      run: gradle assembleDebug
+      run: ./gradlew assembleDebug
 
     - name: Upload APK Artifact
       uses: actions/upload-artifact@v4
