@@ -22,8 +22,11 @@ jobs:
     - name: Setup Gradle
       uses: gradle/actions/setup-gradle@v3
 
+    # 設定權限並使用本地 Gradle 執行
     - name: Build Debug APK
-      run: gradle assembleDebug
+      run: |
+        gradle assembleDebug --warning-mode all
+    *Verification:* 打包步驟改為直接使用 runner 內建 gradle 執行 `assembleDebug`。
 
     - name: Upload APK Artifact
       uses: actions/upload-artifact@v4
